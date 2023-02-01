@@ -15,15 +15,12 @@ namespace CGP_Assessment_Project
 {
     public partial class CanvasForm : Form
     {
-        private ListDictionary shapes = new ListDictionary();
+        private List<Shapes.Shape> shapes = new List<Shapes.Shape>();
         // Dictionary: GraphicsPath shape, Pen pen, bool show?, bool fill?, bool Selected?
-        private GraphicsPath selectedShape;
         private Point lastMouseDown;
-        public Graphics g;
         Pen blackPen = new Pen(Color.Black);
         Pen redPen = new Pen(Color.Red);
         Pen bluePen = new Pen(Color.Blue);
-        Pen selectedPen;
 
         public CanvasForm()
         {
@@ -35,10 +32,11 @@ namespace CGP_Assessment_Project
 
         void Canvas_Paint(object sender, PaintEventArgs e)
         {
-            g = e.Graphics;
-            foreach (GraphicsPath shape in shapes)
+            Graphics g = e.Graphics;
+            foreach (Shapes.Shape shape in shapes)
             {
-                g.DrawPath(bluePen, shape);
+                g.DrawPath(bluePen, shape.shapePath);
+                g.FillPath(new SolidBrush()
             }
             
         }
@@ -46,33 +44,27 @@ namespace CGP_Assessment_Project
         void createSquare_Click(object sender, EventArgs e)
         {
             
-            Shapes.Rectangle defaultSquare = new Shapes.Rectangle(new Point(50, 50), new Point(250, 250));
-            GraphicsPath square = new GraphicsPath();
-            square.AddPolygon(defaultSquare.ps);
-            List<object> attributes = new List<object>();
-            // Pen
-            attributes.Add(blackPen);
-            // Show?
-            attributes.Add(true);
-            // Fill?
-            attributes.Add(false);
-            // Selected?
-            attributes.Add(false);
-            shapes.Add(square, attributes);
-            g.DrawPath(blackPen, square);
-            selectedPen = blackPen;
-            Canvas.Invalidate();
-            Canvas.Paint()
+            Shapes.Shape Square = new Shapes.Shape(new Shapes.Rectangle(p1: new Point(50, 50), 
+                                                                        p2: new Point(250, 250),
+                                                                        pen: redPen,
+                                                                        fillColour: Color.Blue,
+                                                                        show: true,
+                                                                        fill: true,
+                                                                        selected: false));
+            
         }
         
         void CreateTriangle_Click(object sender, EventArgs e)
         {
-
-            Shapes.Triangle defaultTri = new Shapes.Triangle(new Point(100, 50), new Point(250, 250), new Point(50, 300));
-            GraphicsPath tri = new GraphicsPath();
-            tri.AddPolygon(defaultTri.ps);
-            shapes.Add(tri);
-            Canvas.Invalidate();
+            Shapes.Shape triangle = new Shapes.Shape(new Shapes.Triangle(p1: new Point(100, 50),
+                                                                         p2: new Point(250, 250),
+                                                                         p3: new Point(50, 300),
+                                                                         pen: blackPen,
+                                                                         fillColour: Color.Red,
+                                                                         show: true,
+                                                                         fill: true,
+                                                                         selected: false));
+            
             
         }
 
