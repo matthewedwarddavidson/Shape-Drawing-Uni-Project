@@ -35,8 +35,13 @@ namespace CGP_Assessment_Project
             Graphics g = e.Graphics;
             foreach (Shapes.Shape shape in shapes)
             {
-                g.DrawPath(bluePen, shape.shapePath);
-                g.FillPath(new SolidBrush()
+                if (shape.show)
+                {
+                    g.DrawPath(pen: shape.pen,
+                               path: shape.shapePath);
+                    g.FillPath(brush: shape.brush,
+                               path: shape.shapePath);
+                }
             }
             
         }
@@ -51,7 +56,8 @@ namespace CGP_Assessment_Project
                                                                         show: true,
                                                                         fill: true,
                                                                         selected: false));
-            
+            shapes.Add(Square);
+            Canvas.Invalidate();
         }
         
         void CreateTriangle_Click(object sender, EventArgs e)
@@ -64,7 +70,8 @@ namespace CGP_Assessment_Project
                                                                          show: true,
                                                                          fill: true,
                                                                          selected: false));
-            
+            shapes.Add(triangle);
+            Canvas.Invalidate();
             
         }
 
@@ -73,56 +80,85 @@ namespace CGP_Assessment_Project
         {
             Point mouseDownLoc = new Point(e.X, e.Y);
             lastMouseDown = mouseDownLoc;
-            foreach (GraphicsPath path in shapes)
+            foreach (Shapes.Shape shape in shapes)
             {
-                if (path.IsVisible(mouseDownLoc))
+                if (shape.shapePath.IsVisible(mouseDownLoc))
                 {
-                    selectedShape = path;
+                    Shapes.Shape newShape = new Shapes.Shape(lens: shape.lens,
+                                                             shapePath: shape.shapePath,
+                                                             pen: shape.pen,
+                                                             fillColour: shape.fillColour,
+                                                             show: true,
+                                                             fill: shape.fill,
+                                                             selected: true);
+                    shapes.Remove(shape);
+                    shapes.Add(newShape);
+                    Canvas.Invalidate();
+                    break;
                     
                     
                 }
             }
         }
         
-        void Control_MouseUp(Object sender, MouseEventArgs e)
+        void Control_MouseUp(object sender, MouseEventArgs e)
         {
             Point mouseUpLoc = new Point(e.X, e.Y);
-            if (selectedShape != null)
+            Matrix transformMatrix = new Matrix();
+            transformMatrix.Translate(-(lastMouseDown.X - mouseUpLoc.X),
+                                      -(lastMouseDown.Y - mouseUpLoc.Y));
+            foreach (Shapes.Shape shape in shapes)
             {
-                Matrix transformMatrix = new Matrix();
-                transformMatrix.Translate(-(lastMouseDown.X - mouseUpLoc.X),
-                    -(lastMouseDown.Y - mouseUpLoc.Y));
-                transformMatrix.TransformPoints(selectedShape.PathPoints);
-                selectedShape.Transform(transformMatrix);
-                selectedPen = blackPen;
-                Canvas.Invalidate();
-                
+                if (shape.selected)
+                {
+                    transformMatrix.TransformPoints(shape.shapePath.PathPoints);
+                    GraphicsPath newPath = shape.shapePath;
+                    newPath.Transform(transformMatrix);
+                    Shapes.Shape newShape = new Shapes.Shape(lens: shape.lens,
+                                                             shapePath: newPath,
+                                                             pen: shape.pen,
+                                                             fillColour: shape.fillColour,
+                                                             show: true,
+                                                             fill: shape.fill,
+                                                             selected: false);
+                    shapes.Remove(shape);
+                    shapes.Add(newShape);
+                    Canvas.Invalidate();
+                    break;
+                }
             }
+
         }
         void Mouse_Click(object sender, MouseEventArgs e1)
         {
             Point mouseClickLoc = new Point(e1.X, e1.Y);
             if (e1.Button == MouseButtons.Right)
             {
-                foreach (GraphicsPath path in shapes)
+                foreach (Shapes.Shape shape in shapes)
                 {
-                    if (path.IsVisible(mouseClickLoc))
+                    if (shape.shapePath.IsVisible(mouseClickLoc))
                     {
-                        shapes.Remove(path);
+                        shapes.Remove(shape);
                         break;
                     }
                 }
             } 
             if (e1.Button == MouseButtons.Left)
             {
-                foreach (GraphicsPath path in shapes)
+                foreach (Shapes.Shape shape in shapes)
                 {
-                    if (path.IsVisible(mouseClickLoc))
+                    if (shape.shapePath.IsVisible(mouseClickLoc))
                     {
-                        shapes.Add(path);
-                        selectedPen = bluePen;
+                        Shapes.Shape newShape = new Shapes.Shape(lens: shape.lens,
+                                                                 shapePath: shape.shapePath,
+                                                                 pen: bluePen,
+                                                                 fillColour: shape.fillColour,
+                                                                 show: true,
+                                                                 fill: shape.fill,
+                                                                 selected: true);
+                        shapes.Remove(shape);
+                        shapes.Add(newShape);
                         Canvas.Invalidate();
-                        shapes.Remove(path);
                         break;
                     } 
                 } 
