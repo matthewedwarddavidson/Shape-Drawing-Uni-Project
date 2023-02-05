@@ -30,58 +30,73 @@ namespace CGP_Assessment_Project
         /// </summary>
         private void InitializeComponent()
         {
-            CanvasForm canvasForm = this;
-            canvasForm.createSquare = new System.Windows.Forms.Button();
-            canvasForm.createTriangle = new System.Windows.Forms.Button();
-            canvasForm.Canvas = new System.Windows.Forms.Panel();
-            canvasForm.SuspendLayout();
+            this.createSquare = new System.Windows.Forms.Button();
+            this.createTriangle = new System.Windows.Forms.Button();
+            this.createCircle = new System.Windows.Forms.Button();
+            this.Canvas = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
             // 
             // createSquare
             // 
-            canvasForm.createSquare.Location = new System.Drawing.Point(650, 25);
-            canvasForm.createSquare.Name = "createSquare";
-            canvasForm.createSquare.Size = new System.Drawing.Size(125, 30);
-            canvasForm.createSquare.TabIndex = 0;
-            canvasForm.createSquare.Text = "Create Square";
-            canvasForm.createSquare.UseVisualStyleBackColor = true;
-            canvasForm.createSquare.Click += new System.EventHandler(canvasForm.createSquare_Click);
+            this.createSquare.Location = new System.Drawing.Point(488, 20);
+            this.createSquare.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.createSquare.Name = "createSquare";
+            this.createSquare.Size = new System.Drawing.Size(94, 24);
+            this.createSquare.TabIndex = 0;
+            this.createSquare.Text = "Create Square";
+            this.createSquare.UseVisualStyleBackColor = true;
+            this.createSquare.Click += new System.EventHandler(this.createSquare_Click);
             // 
             // createTriangle
             // 
-            canvasForm.createTriangle.Location = new System.Drawing.Point(650, 80);
-            canvasForm.createTriangle.Name = "createTriangle";
-            canvasForm.createTriangle.Size = new System.Drawing.Size(125, 30);
-            canvasForm.createTriangle.TabIndex = 0;
-            canvasForm.createTriangle.Text = "Create Triangle";
-            canvasForm.createTriangle.UseVisualStyleBackColor = true;
-            canvasForm.createTriangle.Click += new System.EventHandler(canvasForm.CreateTriangle_Click);
+            this.createTriangle.Location = new System.Drawing.Point(488, 65);
+            this.createTriangle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.createTriangle.Name = "createTriangle";
+            this.createTriangle.Size = new System.Drawing.Size(94, 24);
+            this.createTriangle.TabIndex = 0;
+            this.createTriangle.Text = "Create Triangle";
+            this.createTriangle.UseVisualStyleBackColor = true;
+            this.createTriangle.Click += new System.EventHandler(this.CreateTriangle_Click);
             // 
             // Canvas
             // 
-            canvasForm.Canvas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            canvasForm.Canvas.BackColor = System.Drawing.SystemColors.Window;
-            canvasForm.Canvas.Location = new System.Drawing.Point(15, 14);
-            canvasForm.Canvas.Name = "Canvas";
-            canvasForm.Canvas.Size = new System.Drawing.Size(600, 425);
-            canvasForm.Canvas.TabIndex = 1;
-            canvasForm.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(Canvas_Paint);
-            
-            canvasForm.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(canvasForm.Control_MouseDown);
-            canvasForm.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(canvasForm.Control_MouseUp);
-            canvasForm.Canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(canvasForm.Mouse_Click);
+            this.Canvas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Canvas.BackColor = System.Drawing.SystemColors.Window;
+            this.Canvas.Location = new System.Drawing.Point(11, 11);
+            this.Canvas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Canvas.Name = "Canvas";
+            this.Canvas.Size = new System.Drawing.Size(450, 345);
+            this.Canvas.TabIndex = 1;
+            this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
+            this.Canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Mouse_Click);
+            this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Control_MouseDown);
+            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Control_MouseUp);
+            // 
+            // createCircle
+            // 
+            this.createCircle.Location = new System.Drawing.Point(488, 110);
+            this.createCircle.Margin = new System.Windows.Forms.Padding(2);
+            this.createCircle.Name = "createCircle";
+            this.createCircle.Size = new System.Drawing.Size(94, 24);
+            this.createCircle.TabIndex = 0;
+            this.createCircle.Text = "Create Circle";
+            this.createCircle.UseVisualStyleBackColor = true;
+            this.createCircle.Click += new System.EventHandler(this.create_circle_Click);
             // 
             // CanvasForm
             // 
-            canvasForm.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            canvasForm.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            canvasForm.BackColor = System.Drawing.SystemColors.Menu;
-            canvasForm.ClientSize = new System.Drawing.Size(800, 450);
-            canvasForm.Controls.Add(canvasForm.Canvas);
-            canvasForm.Controls.Add(canvasForm.createSquare);
-            canvasForm.Controls.Add(canvasForm.createTriangle);
-            canvasForm.Name = "CanvasForm";
-            canvasForm.Text = "Form1";
-            canvasForm.ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Menu;
+            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.Canvas);
+            this.Controls.Add(this.createSquare);
+            this.Controls.Add(this.createTriangle);
+            this.Controls.Add(this.createCircle);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "CanvasForm";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
 
         }
 
@@ -89,6 +104,7 @@ namespace CGP_Assessment_Project
 
         private System.Windows.Forms.Button createSquare;
         private System.Windows.Forms.Button createTriangle;
+        private System.Windows.Forms.Button createCircle;
         private System.Windows.Forms.Panel Canvas;
     }
 }
