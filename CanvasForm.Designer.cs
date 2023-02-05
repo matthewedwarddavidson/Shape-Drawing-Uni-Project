@@ -45,7 +45,7 @@ namespace CGP_Assessment_Project
             this.createSquare.TabIndex = 0;
             this.createSquare.Text = "Create Square";
             this.createSquare.UseVisualStyleBackColor = true;
-            this.createSquare.Click += new System.EventHandler(this.createSquare_Click);
+            
             // 
             // createTriangle
             // 
@@ -56,7 +56,7 @@ namespace CGP_Assessment_Project
             this.createTriangle.TabIndex = 0;
             this.createTriangle.Text = "Create Triangle";
             this.createTriangle.UseVisualStyleBackColor = true;
-            this.createTriangle.Click += new System.EventHandler(this.CreateTriangle_Click);
+
             // 
             // Canvas
             // 
@@ -67,10 +67,7 @@ namespace CGP_Assessment_Project
             this.Canvas.Name = "Canvas";
             this.Canvas.Size = new System.Drawing.Size(450, 345);
             this.Canvas.TabIndex = 1;
-            this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
-            this.Canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Mouse_Click);
-            this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Control_MouseDown);
-            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Control_MouseUp);
+
             // 
             // createCircle
             // 
@@ -81,7 +78,6 @@ namespace CGP_Assessment_Project
             this.createCircle.TabIndex = 0;
             this.createCircle.Text = "Create Circle";
             this.createCircle.UseVisualStyleBackColor = true;
-            this.createCircle.Click += new System.EventHandler(this.create_circle_Click);
             // 
             // CanvasForm
             // 
